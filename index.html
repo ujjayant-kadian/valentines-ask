@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Our Love Story</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+  <!-- The custom font for digits -->
+  <style type="text/css">
+    @font-face {
+      font-family: digit;
+      src: url('digital.ttf') format("truetype");
+    }
+  </style>
+
+  <!-- Link to your custom CSS -->
+  <link href="default.css" type="text/css" rel="stylesheet">
+  
+  <!-- jQuery and other scripts -->
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="garden.js"></script>
+  <script type="text/javascript" src="functions.js"></script>
+
+  <!-- 
+       We will have two main “pages” in one single HTML file:
+       1. The front page (Valentine’s question with yes/no)
+       2. The second page (the poem with the heart).
+       We'll show/hide each with CSS/JS logic. 
+  -->
+  <script type="text/javascript">
+    // Document Ready function
+    $(function() {
+    //   $('#secondPage').hide();
+      let noCount = 0;
+      const memes = [
+        '19-When-You-Finally-Do-Get-Emotional-And-The-Magical-Memory-Tears-Flow.avif',
+        'Dumbledore-Gryffindor-Points-Harry-Potter-Meme-1.avif',
+        'I_Find_Your_Lack_of_Faith_Disturbing_banner.jpg'
+      ];
+      
+	  $('#btnNo').click(function() {
+        if (noCount < memes.length) {
+            $("#questionText").text("Are you sure?");
+            $("#memeImage").attr("src", memes[noCount]).fadeIn();
+            noCount++;
+        } else {
+            alert("I think you should restart now! Don’t break my heart! 😭");
+            noCount = 0;
+            $("#questionText").text("Will you be my Valentine?");
+            $("#memeImage").attr("src", "puss-in-boots-shrek.gif").fadeIn();
+        }
+    });
+
+      // The “Yes” button logic
+      $('#btnYes').click(function() {
+        // Hide the first page
+        $('#firstPage').hide();
+        // Show the second page
+        $('#secondPage').fadeIn(2000, function(){
+          // Start animations from functions.js
+          startHeartAnimation();
+          adjustCodePosition();
+          $("#code").typewriter();
+        });
+      });
+    });
+  </script>
+
+</head>
+<body>
+
+<!-- ========== FIRST PAGE ========== -->
+<div id="firstPage" class="centeredPage">
+	<div class="valentineAsk">
+		<h1 id="questionText">Will you be my Valentine?</h1>
+		<img id="memeImage" src="puss-in-boots-shrek.gif" style="display: block; margin-left: auto; margin-right: auto; width: 300px; height: auto; margin-top: 15px;">
+		<div class="buttonContainer">
+		  <button id="btnYes">Yes</button>
+		  <button id="btnNo">No</button>
+		</div>
+	</div>	
+</div>
+
+<!-- ========== SECOND PAGE ========== -->
+<div id="secondPage">
+  <div id="mainDiv">
+    <div id="content">
+      <div id="code">
+        <span class="comments"></span><br/>
+        <!-- 
+             This area replaced with a romantic poem to Relia. 
+             We'll keep it in a few stanzas as a "comments" block so the styling remains.
+        -->
+        <span class="comments">My Dearest Angel,</span><br/>
+        <span class="comments">
+           Our journey began on September 8th, 2023.<br/>
+           Since then, the days have blossomed like a timeless rose.<br/>
+           Traveling to wondrous places – Dubai’s heat, Morocco’s grandeur,<br/>
+           London’s timeless charms, and sweet Romania feels like home.<br/>
+        </span><br/>
+        <span class="comments">
+           Beside you, the world gleams brighter; in your laughter, I find peace.<br/>
+           Your embrace in new cities, I cherish – each trip the next sweet piece.<br/>
+           Hand in hand, we conquer miles; heart to heart, we share a love complete.<br/>
+        </span><br/>
+        <span class="comments">
+           With each sunrise, I think of you; with each sunset, I hold you near.<br/>
+           From Romania’s calm mornings to London nights so dear,<br/>
+           Our memories entwine gently, weaving stories we hold dear.<br/>
+        </span><br/>
+        <span class="comments">
+           Now I step into a grown man’s days, with new chapters set to start,<br/>
+           Grateful you stand beside me, a flame that warms my heart.<br/>
+           Forever, I promise you wonder, joy, and my unwavering part.<br/>
+        </span><br/>
+
+        <span class="comments">
+          Thank you for bringing me happiness and for letting me love you.<br/>
+          With endless devotion,<br/>
+        </span><br/>
+        <span class="comments">- Ujjayant </span><br/>
+      </div>
+
+      <div id="loveHeart">
+        <canvas id="garden"></canvas>
+        <div id="words">
+          <div id="messages">
+            Relia, I have fallen in love with you for
+            <div id="elapseClock"></div>
+          </div>
+          <div id="loveu">
+            I Love You.<br/>
+            <div class="signature">-  Ujjayant</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- The code reuses the scripts from the original. -->
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var startDate = new Date(2023, 8, 8); // months are 0-based, so 7 = August
+      // Start the timer
+      timeElapse(startDate);
+      setInterval(function() {
+        timeElapse(startDate);
+      }, 1000);
+    });
+  </script>
+
+</div> <!-- end secondPage -->
+
+
+</body>
+</html>
